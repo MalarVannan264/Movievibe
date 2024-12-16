@@ -1,0 +1,435 @@
+/* Category Page Container */
+.category-page {
+    background-color: #000;
+    min-height: calc(100vh - 70px);
+    padding: 24px;
+    color: #ffffff;
+    overflow-x: hidden;
+    animation: fadeIn 0.3s;
+}
+
+/* Genres Filter Section */
+.genres-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+    padding: 16px;
+    justify-content: center;
+    animation: slideUp 0.3s;
+}
+
+.genre-item {
+    padding: 8px 24px;
+    background-color: #1f1f1f;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.genre-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #e50914, transparent);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.genre-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.genre-item:hover::before {
+    opacity: 0.1;
+}
+
+.genre-item.selected {
+    background-color: #e50914;
+    border-color: #ff0f1f;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.3);
+}
+
+.genre-item.selected:hover::before {
+    opacity: 0;
+}
+
+/* Movies Grid */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    padding: 16px;
+    max-width: 1600px;
+    margin: 0 auto;
+    animation: fadeIn 0.3s;
+}
+
+/* Movie Card */
+.movie-card {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: #1f1f1f;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    aspect-ratio: 2/3;
+}
+
+.movie-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.movie-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Movie Info Overlay */
+.movie-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 0, 0, 0.7) 50%,
+        transparent 100%
+    );
+    transform: translateY(100%);
+    transition: transform 0.3s;
+}
+
+.movie-card:hover .movie-info {
+    transform: translateY(0);
+}
+
+.movie-info h3 {
+    margin: 0;
+    font-size: 16px;
+    margin-bottom: 4px;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-info p {
+    margin: 0;
+    color: #b3b3b3;
+    font-size: 14px;
+}
+
+/* Rating Badge */
+.rating {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 4px 8px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rating::before {
+    content: '★';
+    color: #ffd700;
+}
+
+/* Loading and Empty States */
+.loading,
+.select-genre {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 32px;
+    font-size: 18px;
+    color: #b3b3b3;
+    background-color: #1f1f1f;
+    border-radius: 12px;
+    margin: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading Skeleton */
+.skeleton-card {
+    background: linear-gradient(
+        90deg,
+        #1f1f1f 25%,
+        rgba(255, 255, 255, 0.1) 50%,
+        #1f1f1f 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 12px;
+    aspect-ratio: 2/3;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 8px;
+    }
+    
+    .genre-item {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 992px) {
+    .category-page {
+        padding: 16px;
+    }
+    
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+    
+    .movie-info h3 {
+        font-size: 14px;
+    }
+    
+    .movie-info p {
+        font-size: 12px;
+    }
+    
+    .loading,
+    .select-genre {
+        padding: 24px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .category-page {
+        padding: 12px;
+    }
+    
+    .genres-container {
+        padding: 12px;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    
+    .genre-item {
+        padding: 8px 16px;
+        font-size: 13px;
+        border-radius: 20px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .genre-item.selected {
+        transform: scale(1.05);
+    }
+    
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+        padding: 12px;
+    }
+    
+    .rating {
+        padding: 4px 10px;
+        font-size: 13px;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+
+    .movie-info {
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.8) 60%,
+            rgba(0, 0, 0, 0.4) 100%
+        );
+        padding: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .category-page {
+        padding: 10px;
+    }
+
+    .movies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .movie-info {
+        padding: 10px;
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .movie-info h3 {
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .movie-info p {
+        font-size: 12px;
+    }
+    
+    .loading,
+    .select-genre {
+        padding: 16px;
+        margin: 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    .genres-container {
+        padding: 10px;
+        gap: 6px;
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 400px) {
+    .category-page {
+        padding: 8px;
+    }
+
+    .genres-container {
+        gap: 6px;
+        padding: 8px;
+    }
+    
+    .genre-item {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .movies-grid {
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .movie-info {
+        padding: 8px;
+    }
+
+    .movie-info h3 {
+        font-size: 13px;
+    }
+
+    .movie-info p {
+        font-size: 11px;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    .movie-info {
+        transform: translateY(0);
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.8) 60%,
+            rgba(0, 0, 0, 0.4) 100%
+        );
+        opacity: 1;
+    }
+    
+    .movie-card {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .movie-card:active {
+        transform: scale(0.98);
+    }
+    
+    .movie-card:hover {
+        transform: none;
+    }
+    
+    .movie-card:hover img {
+        transform: none;
+    }
+    
+    .genre-item {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .genre-item:active {
+        transform: scale(0.95);
+        background-color: rgba(229, 9, 20, 0.8);
+    }
+    
+    .genre-item:hover {
+        transform: none;
+    }
+
+    .genre-item.selected:active {
+        transform: scale(0.95);
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}

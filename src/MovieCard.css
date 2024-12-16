@@ -1,0 +1,219 @@
+.movie-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    aspect-ratio: 2/3;
+    background: #1a1a1a;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+.movie-card-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+.movie-card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.7) 50%,
+        rgba(0, 0, 0, 0.9) 100%
+    );
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 50%;
+}
+
+.movie-card:hover .movie-card-overlay {
+    opacity: 1;
+}
+
+.movie-card-title {
+    color: white;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.movie-card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.movie-card-rating {
+    color: white;
+    font-size: 0.9rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.favorite-button {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+    z-index: 10;
+}
+
+.favorite-button.active {
+    background: rgba(255, 0, 0, 0.6);
+    border-color: rgba(255, 0, 0, 0.8);
+}
+
+.favorite-button:hover {
+    transform: scale(1.1);
+    background: rgba(255, 0, 0, 0.6);
+    border-color: rgba(255, 0, 0, 0.8);
+}
+
+.favorite-icon {
+    color: white;
+    font-size: 20px;
+    line-height: 1;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Loading state styles */
+.movie-card.loading {
+    background: linear-gradient(110deg, #1a1a1a 8%, #222 18%, #1a1a1a 33%);
+    background-size: 200% 100%;
+    animation: shine 1.5s linear infinite;
+}
+
+.loading .movie-card-overlay {
+    opacity: 0.5;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+}
+
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .movie-card {
+        margin-bottom: 15px;
+    }
+
+    .movie-card-title {
+        font-size: 0.9rem;
+    }
+
+    .movie-card-rating {
+        font-size: 0.8rem;
+    }
+
+    .favorite-button {
+        width: 28px;
+        height: 28px;
+        bottom: 0.75rem;
+        right: 0.75rem;
+    }
+
+    .favorite-icon {
+        font-size: 16px;
+    }
+
+    .mobile-grid .movie-card {
+        height: auto;
+        min-height: 200px;
+    }
+
+    .mobile-grid .movie-card img {
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .movie-card:hover {
+        transform: none;
+    }
+
+    .movie-card-overlay {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 576px) {
+    .movie-card-overlay {
+        padding: 0.75rem;
+        min-height: 45%;
+    }
+
+    .movie-card-title {
+        font-size: 0.8rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .favorite-button {
+        width: 24px;
+        height: 24px;
+        bottom: 0.5rem;
+        right: 0.5rem;
+    }
+
+    .favorite-icon {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mobile-grid .movie-card {
+        min-height: 180px;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    .movie-card:hover {
+        transform: none;
+    }
+
+    .movie-card-overlay {
+        opacity: 1;
+    }
+}
